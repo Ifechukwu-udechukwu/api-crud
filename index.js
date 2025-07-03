@@ -36,6 +36,18 @@ app.get("/api/products", async (req,res)=>{
     }
 });
 
+app.get("/api/products/:id", async (req,res)=>{
+    try{
+        const {id} = req.params;
+        const product = await Product.findById(id);
+        res.status(200).json(product);
+
+    }catch(error){
+        res.status(500).json({message:error.message});
+
+    }
+});
+
 mongoose.connect("mongodb+srv://peterifechukwuudechukwu:Francispeter1996@cluster0.nytn0k4.mongodb.net/Node-API?retryWrites=true&w=majority&appName=Cluster0")
 .then(()=>{
     console.log("im connected to database today");
